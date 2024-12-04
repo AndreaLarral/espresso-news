@@ -1,13 +1,20 @@
 <template>
   <div>
-    <h1 class="text-8xl font-black text-emerald-600">{{ title }}</h1>
-    <h2 class="text-4xl font-black text-pink-400">Bon dia!</h2>
-    <h3 class="text-2xl font-black text-pink-200">Test_Change</h3>
-
+    <nav>
+      <ul class="flex justify-evenly">
+        <li><router-link to="/"><img src="/imgs/Logo_Sketch.png" alt="Home"></router-link>
+        </li>
+        <li><router-link to = "/Sources">Sources</router-link></li>
+        <li><router-link to = "/Countries">Countries</router-link></li>
+        <li><router-link to = "/Categories">Categories</router-link></li>
+      </ul>
+    </nav>
     <RouterView/>
   </div>
 </template>
 <script>
+import { RouterView } from 'vue-router';
+
 export default {
   name: "App",
   data(){
