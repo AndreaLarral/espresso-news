@@ -1,11 +1,11 @@
 import { createWebHashHistory, createRouter } from 'vue-router'
-import Home from './views/Home.vue'
-import NotFound from "./views/NotFound.vue"
+import Home from './views/Home.vue';
+import NotFound from './views/NotFound.vue'; // Corrected the import statement
 import Sources from './views/Sources.vue';
 import Countries from './views/Countries.vue';
 import Categories from './views/Categories.vue';
 import New from './views/New.vue';
-
+import CountryDetail from './components/CountryDetail.vue'; // Import the CountryDetail component
 
 const routes = [
     {
@@ -38,7 +38,12 @@ const routes = [
         name: "New",
         component: New
     },
-
+    {
+        path: "/countries/:country",
+        name: "CountryDetail",
+        component: CountryDetail,
+        props: true
+    }
 ];
 
 const router = createRouter({

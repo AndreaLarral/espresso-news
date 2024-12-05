@@ -1,8 +1,8 @@
 <template>
     <div>
-      <h1>Home view</h1>
+      <h1>News for {{ country }}</h1>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div v-for="news in newsData" :key="news.url" class="p-4 border rounded shadow">
+        <div v-for="news in filteredNews" :key="news.url" class="p-4 border rounded shadow">
           <img :src="getRandomImage()" alt="News Thumbnail" class="w-full h-32 object-cover mb-2">
           <h2 class="mt-2 text-xl font-bold">{{ news.title }}</h2>
           <p>{{ news.description }}</p>
@@ -14,7 +14,8 @@
   
   <script>
   export default {
-    name: "Home",
+    name: "CountryDetail",
+    props: ['country'],
     data() {
       return {
         newsData: [],
@@ -36,13 +37,18 @@
         ]
       };
     },
+    computed: {
+      filteredNews() {
+        return this.newsData.filter(news => news.source.country === this.country);
+      }
+    },
     methods: {
       async fetchNews() {
         try {
-          const response = await fetch("https://newsapi.org/v2/everything?q=global&apiKey=0aaed02f5a0f4523be25a1addddc6c59");
+          const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${this.country}&apiKey=0aaed02f5a0f4523be25a1addddc6c59`);
           const data = await response.json();
           console.log("Fetched news data:", data.articles);
-          this.newsData = data.articles; 
+          this.newsData = data.articles; // Assuming the API returns an array of news articles in data.articles
         } catch (error) {
           console.log(error);
         }
@@ -60,8 +66,4 @@
   
   <style>
   </style>
-  
-  
-  
-  
   
