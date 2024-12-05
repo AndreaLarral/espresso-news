@@ -39,7 +39,7 @@
     methods: {
       async fetchNews() {
         try {
-          const response = await fetch("https://newsapi.org/v2/everything?q=global&apiKey=0aaed02f5a0f4523be25a1addddc6c59");
+          const response = await fetch("https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${process.env.NEWS_API_KEY}");
           const data = await response.json();
           console.log("Fetched news data:", data.articles);
           this.newsData = data.articles; 

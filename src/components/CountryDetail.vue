@@ -45,7 +45,7 @@
     methods: {
       async fetchNews() {
         try {
-          const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${this.country}&apiKey=0aaed02f5a0f4523be25a1addddc6c59`);
+          const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${this.country}&apiKey=${process.env.NEWS_API_KEY}`);
           const data = await response.json();
           console.log("Fetched news data:", data.articles);
           this.newsData = data.articles; // Assuming the API returns an array of news articles in data.articles
