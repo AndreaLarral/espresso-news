@@ -1,5 +1,4 @@
 import { createWebHashHistory, createRouter } from 'vue-router'
-import Home from './views/Home.vue';
 import NotFound from './views/NotFound.vue'; // Corrected the import statement
 import Sources from './views/Sources.vue';
 import News from './views/News.vue';
@@ -10,8 +9,8 @@ import Countries from './views/Countries.vue';
 const routes = [
     {
         path: "/",
-        name: "Home",
-        component: Home
+        name: "News",
+        component: News
     },
     {
         path: "/:path(.*)",
@@ -22,11 +21,6 @@ const routes = [
         path: "/sources",
         name: "Sources",
         component: Sources
-    },
-    {
-        path: "/news",
-        name: "News",
-        component: News
     },
     {
         path: "/categories",
@@ -43,6 +37,7 @@ const routes = [
         name: "Countries",
         component: Countries
     },
+    
 
 ];
 
