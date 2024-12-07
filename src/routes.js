@@ -2,10 +2,10 @@ import { createWebHashHistory, createRouter } from 'vue-router'
 import Home from './views/Home.vue';
 import NotFound from './views/NotFound.vue'; // Corrected the import statement
 import Sources from './views/Sources.vue';
-import Countries from './views/Countries.vue';
+import News from './views/News.vue';
 import Categories from './views/Categories.vue';
 import New from './views/New.vue';
-import CountryDetail from './components/CountryDetail.vue'; // Import the CountryDetail component
+import Countries from './views/Countries.vue';
 
 const routes = [
     {
@@ -24,9 +24,9 @@ const routes = [
         component: Sources
     },
     {
-        path: "/countries",
-        name: "Countries",
-        component: Countries
+        path: "/news",
+        name: "News",
+        component: News
     },
     {
         path: "/categories",
@@ -39,11 +39,11 @@ const routes = [
         component: New
     },
     {
-        path: "/countries/:country",
-        name: "CountryDetail",
-        component: CountryDetail,
-        props: true
-    }
+        path: "/countries",
+        name: "Countries",
+        component: Countries
+    },
+
 ];
 
 const router = createRouter({

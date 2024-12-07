@@ -97,7 +97,7 @@
         try {
           const countryCodes = Object.keys(this.countryCodeToName);
           for (const countryCode of countryCodes) {
-            const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=0aaed02f5a0f4523be25a1addddc6c59`);
+            //const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${process.env.NEWS_API_KEY}`);
             const data = await response.json();
             console.log(`Fetched news data for ${countryCode}:`, data.articles);
             this.newsData.push(...data.articles); // Assuming the API returns an array of news articles in data.articles
@@ -129,7 +129,7 @@
           return this.countryCoordinates[countryName];
         }
         try {
-          const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${countryName}&key=AIzaSyCXVGbInLJjOzvu2Q2ZpB3OSFDP_CF_fjE`);
+          const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${countryName}&key=${process.env.MAPS_API_KEY}`);
           const data = await response.json();
           if (data.results && data.results.length > 0) {
             const location = data.results[0].geometry.location;
@@ -197,4 +197,5 @@
     height: 500px;
   }
   </style>
+  
   
