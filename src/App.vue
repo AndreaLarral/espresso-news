@@ -6,7 +6,7 @@
       </router-link>
       <nav>
         <ul class="flex space-x-4">
-          <li><router-link to="/Sources">Sources</router-link></li>
+          <li><router-link to="/News">News</router-link></li>
           <li><router-link to="/Countries">Countries</router-link></li>
           <li><router-link to="/Categories">Categories</router-link></li>
         </ul>

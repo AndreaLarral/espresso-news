@@ -97,7 +97,7 @@
         try {
           const countryCodes = Object.keys(this.countryCodeToName);
           for (const countryCode of countryCodes) {
-            const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${process.env.NEWS_API_KEY}`);
+            //const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${process.env.NEWS_API_KEY}`);
             const data = await response.json();
             console.log(`Fetched news data for ${countryCode}:`, data.articles);
             this.newsData.push(...data.articles); // Assuming the API returns an array of news articles in data.articles
@@ -197,4 +197,5 @@
     height: 500px;
   }
   </style>
+  
   
