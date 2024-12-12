@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h1>News view</h1>
+    <h2 class="flex justify-center text-4xl font-bold text-amber-950">Morning coffee? Morning news</h2>
+    <h3 class="flex justify-center text-2xl pb-6 pt-3">Discover the latest freshly brewed news from all around the world.</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div v-for="news in newsData" :key="news.url" class="p-4 border rounded shadow">
-        <img :src="getRandomImage()" alt="News Thumbnail" class="w-full h-32 object-cover mb-2">
-        <h2 class="mt-2 text-xl font-bold">{{ news.title }}</h2>
+      <div v-for="news in newsData" :key="news.url" class="p-4 border rounded-md shadow bg-gray-100">
+        <img :src="getRandomImage()" alt="News Thumbnail" class="w-full h-32 object-cover mb-2 rounded-md">
+        <h3 class="mt-2 text-xl font-bold">{{ news.title }}</h3>
         <p>{{ news.description }}</p>
-        <a :href="news.url" target="_blank" class="text-blue-500">Read more</a>
+        <a :href="news.url" target="_blank" class="text-amber-700 hover:text-amber-600">Learn more</a>
       </div>
     </div>
   </div>
