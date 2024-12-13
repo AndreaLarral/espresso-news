@@ -95,13 +95,18 @@
     methods: {
       async fetchNews() {
         try {
-          const countryCodes = Object.keys(this.countryCodeToName);
-          for (const countryCode of countryCodes) {
-            //const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${countryCode}&apiKey=${process.env.NEWS_API_KEY}`);
-            const data = await response.json();
-            console.log(`Fetched news data for ${countryCode}:`, data.articles);
-            this.newsData.push(...data.articles);
-          }
+          const API_KEY = import.meta.env.VITE_NEWS_API_KEY
+            const headers = {
+                'X-Api-Key': API_KEY,
+            };
+
+          const response = await fetch("https://newsapi.org/v2/top-headlines/sources", {
+              method: 'GET',
+              headers: headers
+          })
+
+          const data = await response.json();
+          this.newsData.push(...data.sources);
           this.categorizeNewsByCountry();
           this.initializeMap();
         } catch (error) {
@@ -110,7 +115,7 @@
       },
       categorizeNewsByCountry() {
         this.categorizedNews = this.newsData.reduce((acc, news) => {
-          const country = news.source.country || 'Unknown';
+          const country = news.country || 'Unknown';
           if (!acc[country]) {
             acc[country] = [];
           }
@@ -129,7 +134,8 @@
           return this.countryCoordinates[countryName];
         }
         try {
-          const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${countryName}&key=${process.env.MAPS_API_KEY}`);
+          const MAPS_API_KEY = import.meta.env.VITE_MAPS_API_KEY
+          const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${countryName}&key=${MAPS_API_KEY}`);
           const data = await response.json();
           if (data.results && data.results.length > 0) {
             const location = data.results[0].geometry.location;
@@ -192,10 +198,10 @@
   </script>
   
   <style>
-  #map {
+  /* #map {
     width: 100%;
     height: 500px;
-  }
+  } */
   </style>
   
   
