@@ -156,6 +156,9 @@
           center: { lat: 20, lng: 0 },
           zoom: 2
         });
+
+        const infoWindow = new google.maps.InfoWindow()
+
   
         for (const countryCode in this.categorizedNews) {
           const newsCount = this.categorizedNews[countryCode].length;
@@ -167,27 +170,19 @@
               map: this.map,
               title: `${this.countryCodeToName[countryCode.toLowerCase()]}: ${newsCount} news articles`
             });
-  
-            const infoWindow = new google.maps.InfoWindow({
-              content: `<b>${this.countryCodeToName[countryCode.toLowerCase()]}</b><br>${newsCount} news articles`
-            });
-  
+    
             marker.addListener('click', () => {
-              infoWindow.open(this.map, marker);
-              this.$router.push({ name: 'CountryDetail', params: { country: countryCode } });
-            });
-  
-            marker.addListener('mouseover', () => {
+              infoWindow.setContent(`<b>${this.countryCodeToName[countryCode.toLowerCase()]}</b><br>${newsCount} news articles<br><a href="#/news/${countryCode}">View News</a>`);              
               infoWindow.open(this.map, marker);
             });
-  
-            marker.addListener('mouseout', () => {
-              infoWindow.close();
-            });
+
           } else {
             console.log(`No coordinates found for ${countryCode}`);
           }
         }
+        
+        this.map.addListener('click', () => { infoWindow.close(); });
+
       }
     },
     mounted() {
@@ -198,10 +193,7 @@
   </script>
   
   <style>
-  /* #map {
-    width: 100%;
-    height: 500px;
-  } */
+
   </style>
   
   
