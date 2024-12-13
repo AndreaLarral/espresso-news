@@ -4,3 +4,7 @@
 
 
 /* aquí pondré propiedades css */
+#map {
+    width: 100%;
+    height: 500px;
+  }
