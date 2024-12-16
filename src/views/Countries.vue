@@ -126,10 +126,6 @@
       },
       async getCountryCoordinates(countryCode) {
         const countryName = this.countryCodeToName[countryCode.toLowerCase()];
-        if (!countryName) {
-          console.log(`No country name found for code ${countryCode}`);
-          return null;
-        }
         if (this.countryCoordinates[countryName]) {
           return this.countryCoordinates[countryName];
         }
@@ -141,10 +137,7 @@
             const location = data.results[0].geometry.location;
             this.countryCoordinates[countryName] = { lat: location.lat, lng: location.lng };
             return this.countryCoordinates[countryName];
-          } else {
-            console.log(`No coordinates found for ${countryName}`);
-            return null;
-          }
+          } 
         } catch (error) {
           console.log(`Error fetching coordinates for ${countryName}:`, error);
           return null;
@@ -157,9 +150,8 @@
           zoom: 2
         });
 
-        const infoWindow = new google.maps.InfoWindow()
+        const infoWindow = new google.maps.InfoWindow();
 
-  
         for (const countryCode in this.categorizedNews) {
           const newsCount = this.categorizedNews[countryCode].length;
           const coordinates = await this.getCountryCoordinates(countryCode);
@@ -168,28 +160,37 @@
             const marker = new google.maps.Marker({
               position: coordinates,
               map: this.map,
-              title: `${this.countryCodeToName[countryCode.toLowerCase()]}: ${newsCount} news articles`
+              title: `${this.countryCodeToName[countryCode.toLowerCase()]}: ${newsCount} news articles`,
+              icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 10,
+                fillColor: 'brown',
+                fillOpacity: 1,
+                strokeWeight: 1,
+                strokeColor: 'brown'
+              }
             });
-    
+
             marker.addListener('click', () => {
-              infoWindow.setContent(`<b>${this.countryCodeToName[countryCode.toLowerCase()]}</b><br>${newsCount} news articles<br><a href="#/news/${countryCode}">View News</a>`);              
+              infoWindow.setContent(`<b>${this.countryCodeToName[countryCode.toLowerCase()]}</b><br>${newsCount} news articles<br><a href="#/news/${countryCode}">View News</a>`);
               infoWindow.open(this.map, marker);
             });
-
-          } else {
-            console.log(`No coordinates found for ${countryCode}`);
-          }
+          } 
         }
-        
-        this.map.addListener('click', () => { infoWindow.close(); });
 
+        this.map.addListener('click', () => {
+          infoWindow.close();
+        });
       }
+
     },
     mounted() {
       console.log("Mounted component...");
       this.fetchNews();
     }
   };
+
+  
   </script>
   
   <style>
