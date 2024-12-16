@@ -65,6 +65,7 @@ export default {
   },
   mounted() {
     this.countryName = this.$route.params.country;
+    console.log("Country name:", this.countryName);
     this.fetchCountryNews();
   }
 };
