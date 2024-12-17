@@ -47,13 +47,14 @@ export default {
           'X-Api-Key': API_KEY,
         };
 
-        const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${this.$route.params.country}`, {
+        const response = await fetch(`https://newsapi.org/v2/top-headlines/sources?country=${this.$route.params.country}`, {
           method: 'GET',
           headers: headers
         });
+        console.log(this.$route.params.country)
         let data = await response.json();
-        console.log("Fetched country news data:", data.articles);
-        this.countryNews = data.articles;
+        console.log("Fetched country news data:", data.sources);
+        this.countryNews = data.sources;
       } catch (error) {
         console.log(error);
       }
