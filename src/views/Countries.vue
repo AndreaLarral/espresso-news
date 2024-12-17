@@ -1,6 +1,7 @@
 <template>
     <div>
-      <h1>News by Country</h1>
+      <h2 class="flex justify-center text-4xl font-bold text-amber-950">Today's global news menu</h2>
+      <h3 class="flex justify-center text-2xl pb-3">Select a country and stay updated on what happens around you.</h3>
       <div id="map" style="height: 500px;"></div>
     </div>
   </template>
@@ -163,10 +164,10 @@
               title: `${this.countryCodeToName[countryCode.toLowerCase()]}: ${newsCount} news articles`,
               icon: {
                 path: google.maps.SymbolPath.CIRCLE,
-                scale: 10,
+                scale: 5,
                 fillColor: 'brown',
                 fillOpacity: 1,
-                strokeWeight: 1,
+                strokeWeight: 0,
                 strokeColor: 'brown'
               }
             });
